@@ -1,12 +1,305 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Cafetería-Biblioteca Mágica y Acogedora</title>
+		<meta name="description" content="Un refugio donde las historias y los sabores se encuentran: cafetería y biblioteca en un espacio mágico y acogedor." />
+		<style>
+			:root{
+				--bg: #f7efe6; /* crema suave */
+				--card: #fffdf8;
+				--accent: #b86b2a; /* terracota/ocre */
+				--mustard: #d9ac3c; /* mostaza suave */
+				--coffee: #6b4f35; /* café oscuro */
+				--golden: #c9a15a; /* dorado pálido */
+				--green: #4f6f5a; /* verde reducido */
+				--red: #8b2f2f; /* rojo cálido para títulos */
+				--muted: #6f6a60;
+				--radius: 12px;
+				--max-width: 1100px;
+			}
+
+			html,body{height:100%;}
+			body{
+				margin:0;
+				font-family: 'Georgia', 'Times New Roman', serif;
+				background: linear-gradient(180deg,var(--bg),#efe7db);
+				color: #2b2b2b;
+				-webkit-font-smoothing:antialiased;
+				-moz-osx-font-smoothing:grayscale;
+				line-height:1.45;
+			}
+
+			/* Container */
+			.wrap{max-width:var(--max-width);margin:0 auto;padding:20px;}
+
+			/* Header */
+			header{
+				position:relative;
+				display:block;
+				padding:22px 0 0 0;
+				min-height:100vh; /* occupy full viewport */
+				border-radius:0;
+				overflow:hidden;
+				background-size:cover;
+				background-position:center center;
+				background-repeat:no-repeat;
+				background-attachment:fixed;
+				background-image: linear-gradient(180deg, rgba(15,18,12,0.28), rgba(255,255,255,0.02)), url('imagen/fondo.png');
+			}
+
+			.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;position:absolute;left:20px;top:18px;z-index:6}
+			.logo-mark{
+				width:56px;height:56px;background:linear-gradient(135deg,#fff,#f6efe7);
+				border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(80,60,40,0.08);
+			}
+			/* simple svg mark styling */
+			.brand{font-weight:600;font-size:1.05rem;color:var(--red)}
+
+			nav{position:absolute;right:20px;top:18px;z-index:6}
+			nav ul{display:flex;gap:12px;list-style:none;padding:8px 12px;margin:0;background:rgba(255,255,255,0.85);border-radius:10px;align-items:center}
+			nav a{color:var(--red);text-decoration:none;font-weight:600;padding:6px 8px;border-radius:6px}
+			nav a:hover{background:rgba(139,47,47,0.12);color:#fff}
+
+			/* Header center reserved button */
+			.header-center{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);z-index:5;display:flex;align-items:center;justify-content:center}
+			.header-center .cta{padding:14px 22px;font-size:1.05rem}
+
+			.cta{
+				background:linear-gradient(180deg,var(--accent),#a45520);
+				color:#fff;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(184,107,42,0.16);
+				border:none;font-weight:700;cursor:pointer;transition:transform .14s ease,box-shadow .14s ease;
+			}
+			.cta:active{transform:translateY(1px)}
+
+			/* Hero */
+			.hero{
+				margin-top:12px;background-image:linear-gradient(180deg,var(--bg),#efe7db);
+				background-size:cover;background-position:center;border-radius:18px;overflow:hidden;position:relative;
+				min-height:62vh;display:flex;align-items:center;color:var(--card);
+			}
+			/* background placeholder styling using gradient + texture look */
+			.hero::before{
+				content:'';position:absolute;inset:0;background:radial-gradient(closest-side, rgba(255,250,243,0.6), rgba(245,236,224,0.6));mix-blend-mode:screen;pointer-events:none;
+			}
+
+			.hero-inner{position:relative;z-index:2;padding:56px;max-width:900px}
+			.eyebrow{font-family: 'Courier New', monospace;color:var(--muted);font-size:0.95rem;margin-bottom:10px}
+			h1{font-family: 'Playfair Display', Georgia, serif;font-size:2.6rem;color:var(--red);margin:0 0 14px;line-height:1.05;text-shadow:0 8px 32px rgba(0,0,0,0.12)}
+			p.lead{color: #425a4a;font-size:1.05rem;margin:0 0 18px;max-width:720px}
+
+			.hero-buttons{display:flex;gap:12px;margin-top:12px}
+			.btn{
+				background:transparent;border:2px solid rgba(255,255,255,0.18);color:var(--card);padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;backdrop-filter: blur(4px);
+				transition:transform .18s ease,box-shadow .18s ease,background .18s ease;color: #3a2f24;
+			}
+			.btn.primary{background:linear-gradient(180deg,var(--mustard),#cfa23e);border:none;color:#2f2215}
+			.btn.secondary{background:rgba(255,255,255,0.9);color:var(--coffee)}
+			.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(50,40,30,0.08)}
+
+			/* About */
+			.about{margin:36px 0;padding:26px;background:linear-gradient(180deg,var(--card),#fffdf9);border-radius:14px;display:flex;gap:22px;align-items:center}
+			.about .text{flex:1}
+			.about h2{margin:0 0 8px;font-family: 'Playfair Display', Georgia, serif;color:var(--red)}
+			.icons{display:flex;gap:14px;align-items:center}
+			.icon{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#fff,#f6f0e7);display:flex;align-items:center;justify-content:center;color:var(--green);box-shadow:0 6px 14px rgba(0,0,0,0.06)}
+
+			/* Featured two columns */
+			.featured{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0}
+			.card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 8px 24px rgba(30,20,10,0.04)}
+			.card h3{margin-top:0;color:var(--red)}
+
+			/* Autumn leaves decorative elements (emoji-based for simplicity) */
+			.leaf{position:absolute;font-size:36px;opacity:0.92;pointer-events:none;transform:rotate(-12deg);filter:drop-shadow(0 6px 8px rgba(0,0,0,0.15))}
+			.leaf.small{font-size:22px;opacity:0.85}
+			.leaf.faint{opacity:0.6;filter:none}
+
+			.menu-list,.books-list{display:flex;flex-direction:column;gap:12px}
+			.menu-item{display:flex;gap:12px;align-items:center}
+			.menu-item img{width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0}
+			.menu-item .meta{font-size:0.95rem;color:var(--muted)}
+
+			.book-item{display:flex;gap:12px;align-items:center}
+			.book-item img{width:64px;height:88px;object-fit:cover;border-radius:6px;border:1px solid rgba(0,0,0,0.06)}
+			.book-item em{color:var(--muted);font-style:italic}
+
+			footer{padding:26px 0;color:var(--muted);text-align:center}
+
+			/* Responsive */
+			@media (max-width:900px){
+				.hero{min-height:56vh}
+				.hero-inner{padding:28px}
+				.featured{grid-template-columns:1fr}
+				nav ul{display:none}
+			}
+
+			@media (max-width:520px){
+				h1{font-size:1.6rem}
+				.logo-mark{width:46px;height:46px}
+				.cta{padding:8px 12px}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<a class="logo" href="#">
+					<div class="logo-mark" aria-hidden="true">
+						<!-- simple inline svg: book + cup + stars -->
+						<svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<path d="M3 7c2-1 4-1 6 0 2-1 4-1 6 0v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z" fill="#cfa77a" opacity="0.95"/>
+							<path d="M13 9h6v6" stroke="#7a4b2a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M16 4l.6.6M18 2l.4.8" stroke="#f2e4c9" stroke-width="0.9" stroke-linecap="round"/>
+						</svg>
+					</div>
+					<div>
+						<div class="brand">Cafetería & Biblioteca</div>
+						<div style="font-size:.78rem;color:var(--muted);margin-top:4px">Un rincón mágico</div>
+					</div>
+				</a>
+
+				<nav aria-label="Navegación principal">
+					<ul>
+						<li><a href="#inicio">Inicio</a></li>
+						<li><a href="#menu">Menú</a></li>
+						<li><a href="#biblioteca">Biblioteca</a></li>
+						<li><a href="#eventos">Eventos</a></li>
+						<li><a href="#ubicacion">Ubicación</a></li>
+						<li><a href="#contacto">Contacto</a></li>
+					</ul>
+				</nav>
+
+				<!-- reservation button moved to header center for visual emphasis -->
+                
+				<!-- header-center inserted below -->
+				<div class="header-center">
+					<button class="cta" onclick="document.getElementById('reserva').scrollIntoView({behavior:'smooth'})">Reserva tu mesa</button>
+				</div>
+				<!-- decorative leaves in header -->
+				<div class="leaf" style="left:12px;top:14px;transform:rotate(-8deg);">🍁</div>
+				<div class="leaf small" style="right:18px;top:80px;transform:rotate(10deg);">🍂</div>
+				<div class="leaf faint" style="left:6%;top:55%;font-size:48px;transform:rotate(22deg);">🍂</div>
+			</header>
+
+			<!-- Hero -->
+			<section id="inicio" class="hero" role="region" aria-label="Hero">
+				<div class="hero-inner">
+					<div class="eyebrow">Bienvenido</div>
+					<h1>Un refugio donde las historias y los sabores se encuentran</h1>
+					<p class="lead">Descubre nuestra cafetería-biblioteca, un espacio mágico para tu mente y tu paladar.</p>
+
+					<div class="hero-buttons">
+						<button class="btn primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Explora nuestro menú</button>
+						<button class="btn secondary" onclick="document.getElementById('biblioteca').scrollIntoView({behavior:'smooth'})">Descubre nuestra biblioteca</button>
+					</div>
+				</div>
+			</section>
+
+			<!-- About -->
+			<section class="about" id="about">
+				<div class="text">
+					<h2>Sobre Nosotros</h2>
+					<p>En <strong>Cafetería & Biblioteca</strong>, hemos creado un espacio donde la magia de los libros se mezcla con el aroma del café recién hecho. Relájate en un ambiente cálido, rodeado de historias, luces tenues y una atmósfera que invita a soñar.</p>
+				</div>
+				<div class="icons" aria-hidden="false">
+						<div class="icon" title="Libro">📚</div>
+						<div class="icon" title="Taza">☕</div>
+						<div class="icon" title="Lámpara">💡</div>
+						<div class="icon" title="Sillón">🛋️</div>
+					<!-- small autumn leaves near about -->
+					<div class="leaf small" style="right:12px;bottom:-8px;transform:rotate(8deg);">🍁</div>
+				</div>
+			</section>
+
+			<!-- Featured -->
+			<section class="featured">
+				<div class="card" id="menu">
+					<h3>Menú Destacado</h3>
+					<div class="menu-list">
+						<div class="menu-item">
+							<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&q=60&w=640&fit=crop" alt="Capuchino"/>
+							<div>
+								<div style="font-weight:700;color:var(--red)">Capuchino cremoso</div>
+								<div class="meta">Con un toque de canela y espuma sedosa.</div>
+							</div>
+						</div>
+
+						<div class="menu-item">
+							<img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&q=60&w=640&fit=crop" alt="Té de jazmín"/>
+							<div>
+								<div style="font-weight:700;color:var(--red)">Té de jazmín</div>
+								<div class="meta">Aroma floral, ideal para relajarse entre páginas.</div>
+							</div>
+						</div>
+
+						<div class="menu-item">
+							<img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&q=60&w=640&fit=crop" alt="Pastelería artesanal"/>
+							<div>
+								<div style="font-weight:700;color:var(--red)">Pastelería artesanal</div>
+								<div class="meta">Croissant de almendra y bollería recién horneada.</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" id="biblioteca">
+					<h3>Biblioteca Recomendada</h3>
+					<div class="books-list">
+						<div class="book-item">
+							<img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&q=60&w=400&fit=crop" alt="Portada libro"/>
+							<div>
+								<div style="font-weight:700;color:var(--red)">Cuentos de medianoche</div>
+								<div class="meta"><em>"Donde cada taza guarda una historia"</em></div>
+							</div>
+						</div>
+
+						<div class="book-item">
+							<img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&q=60&w=400&fit=crop" alt="Portada libro"/>
+							<div>
+								<div style="font-weight:700;color:var(--red)">Notas para una tarde</div>
+								<div class="meta"><em>"Lecturas para el alma y sobremesa"</em></div>
+							</div>
+						</div>
+
+						<div class="book-item">
+							<img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&q=60&w=400&fit=crop" alt="Portada libro"/>
+							<div>
+								<div style="font-weight:700;color:var(--red)">El rincón del lector</div>
+								<div class="meta"><em>"Historias que huelen a café"</em></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Reserva small section (anchor target) -->
+			<section id="reserva" class="card" style="border-radius:14px;margin-bottom:18px">
+				<h3>Reserva tu mesa</h3>
+				<p style="margin-top:6px;color:var(--muted)">Llámanos o envíanos un mensaje para reservar un rincón acogedor. También puedes reservar en línea más adelante.</p>
+			</section>
+
+			<footer>
+				<div style="margin-bottom:8px;color:var(--muted)">Cafetería & Biblioteca — un rincón mágico · Granada: Zona de universidad · Tel: (555) 123-456</div>
+				<div style="font-size:.9rem;color:var(--muted)">© <span id="year"></span> Todos los derechos reservados</div>
+			</footer>
+		</div>
+
+		<script>
+			// small script: set year and lazy background image
+			document.getElementById('year').textContent = new Date().getFullYear();
+
+			// Apply a warm blurred background image to hero for visual feel. If the user wants to replace, they can edit the URL below.
+			(function(){
+				const hero = document.querySelector('.hero');
+				const url = 'https://images.unsplash.com/photo-1502334201984-2e4f3a7f5b3b?auto=format&q=60&w=1600&fit=crop';
+				const img = new Image();
+				img.src = url;
+				img.onload = function(){
+					hero.style.backgroundImage = `linear-gradient(180deg, rgba(27,20,12,0.12), rgba(255,255,255,0.02)), url(${url})`;
+				}
+			})();
+		</script>
+	</body>
 </html>
+
